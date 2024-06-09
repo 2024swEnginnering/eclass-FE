@@ -1,5 +1,5 @@
 import Sidebar from "@/components/Sidebar";
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import styled from "styled-components";
 
 const Section = styled.section`
@@ -9,10 +9,12 @@ const Section = styled.section`
 `;
 
 export default function SidebarLayout() {
+  const isLogin = localStorage.getItem("accessToken");
+
   return (
     <Section>
       <Sidebar />
-      <Outlet />
+      {isLogin ? <Outlet /> : <Navigate to='/login' />}
     </Section>
   );
 }

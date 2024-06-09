@@ -2,6 +2,7 @@ import logo from "@/assets/CAU_logo.svg";
 import { login } from "@/service/authService";
 import { AxiosError } from "axios";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -97,12 +98,14 @@ interface LoginFormValues {
 
 export default function LoginPage() {
   const { register, handleSubmit } = useForm<LoginFormValues>();
+  const navigate = useNavigate();
 
   const onSubmit = handleSubmit(async (data) => {
     try {
       const response = await login(data.id, data.password);
       if (response) {
-        alert("로그인에 성공했습니다"); // TODO : 로그인 성공시 메인 페이지로 이동
+        alert("로그인에 성공했습니다");
+        navigate("/");
       }
     } catch (error) {
       const status = (error as AxiosError).response?.status;
@@ -112,7 +115,8 @@ export default function LoginPage() {
       } else if (status === 402) {
         alert("비밀번호를 확인해주세요");
       } else {
-        alert("알 수 없는 오류가 발생했습니다. 관리자에게 문의하세요");
+        // alert("알 수 없는 오류가 발생했습니다. 관리자에게 문의하세요");
+        alert("비밀번호 형식 오류");
       }
     }
   });
@@ -126,6 +130,7 @@ export default function LoginPage() {
         <LoginTitle>로그인</LoginTitle>
         <LoginInput
           placeholder='아이디'
+          id='id'
           style={{ marginBottom: "25px" }}
           {...register("id")}
           required
@@ -133,6 +138,8 @@ export default function LoginPage() {
         <LoginInput
           placeholder='비밀번호'
           type='password'
+          id='password'
+          autoComplete='on'
           required
           {...register("password")}
         />

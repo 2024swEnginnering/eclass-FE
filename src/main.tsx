@@ -4,12 +4,13 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { RouterProvider } from "react-router-dom";
 import "./index.css";
-import LoginPage from "./pages/Login";
+import RootRouter from "./routes/RootRouter";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    {/* <RouterProvider router={RootRouter} /> */}
-    <LoginPage />
+    <RouterProvider router={RootRouter} />
+    {/* <LoginPage /> */}
   </React.StrictMode>
 );
