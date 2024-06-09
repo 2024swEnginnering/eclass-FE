@@ -28,6 +28,11 @@ const Content = styled.div`
 
   margin-top: 146px;
   border-radius: 0 0 10px 10px;
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+    color: blue;
+  }
 `;
 
 export default function LectureCard({
