@@ -35,7 +35,7 @@ export default function Sidebar() {
   const { current, setCurrent } = useCurrentStore();
 
   return (
-    <Drawer variant='permanent' sx={{ width: "120px", display: "flex" }}>
+    <Drawer variant='permanent' sx={{ isplay: "flex" }}>
       <List sx={{ backgroundColor: "#3064c5", height: "100vh" }}>
         {items.map((item) => {
           const selected = current;

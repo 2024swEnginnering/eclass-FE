@@ -4,8 +4,9 @@ import styled from "styled-components";
 
 const Section = styled.section`
   width: 100vw;
+  height: 100vh;
   display: grid;
-  grid-template-columns: 15vw 1fr;
+  grid-template-columns: 80px 1fr;
 `;
 
 export default function SidebarLayout() {
