@@ -1,4 +1,7 @@
 import logo from "@/assets/CAU_logo.svg";
+import { login } from "@/service/authService";
+import { AxiosError } from "axios";
+import { useForm } from "react-hook-form";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -18,7 +21,7 @@ const Header = styled.h1`
   background-color: #154a9a;
 `;
 
-const LoginWrapper = styled.div`
+const LoginForm = styled.form`
   margin-top: 50px;
   display: flex;
   flex-direction: column;
@@ -87,19 +90,55 @@ const Link = styled.a`
   font-weight: bold;
 `;
 
+interface LoginFormValues {
+  id: string;
+  password: string;
+}
+
 export default function LoginPage() {
+  const { register, handleSubmit } = useForm<LoginFormValues>();
+
+  const onSubmit = handleSubmit(async (data) => {
+    try {
+      const response = await login(data.id, data.password);
+      if (response) {
+        alert("로그인에 성공했습니다"); // TODO : 로그인 성공시 메인 페이지로 이동
+      }
+    } catch (error) {
+      const status = (error as AxiosError).response?.status;
+      console.log(status);
+      if (status === 401) {
+        alert("아이디를 확인해주세요");
+      } else if (status === 402) {
+        alert("비밀번호를 확인해주세요");
+      } else {
+        alert("알 수 없는 오류가 발생했습니다. 관리자에게 문의하세요");
+      }
+    }
+  });
+
   return (
     <Wrapper>
       <Header>
         <img src={logo} alt='CAU logo' width={193} />
       </Header>
-      <LoginWrapper>
+      <LoginForm onSubmit={onSubmit}>
         <LoginTitle>로그인</LoginTitle>
-        <LoginInput placeholder='아이디' style={{ marginBottom: "25px" }} />
-        <LoginInput placeholder='비밀번호' type='password' />
+        <LoginInput
+          placeholder='아이디'
+          style={{ marginBottom: "25px" }}
+          {...register("id")}
+          required
+        />
+        <LoginInput
+          placeholder='비밀번호'
+          type='password'
+          required
+          {...register("password")}
+        />
         <Divider />
-        <LoginButton>로그인</LoginButton>
-      </LoginWrapper>
+        <LoginButton type='submit'>로그인</LoginButton>
+      </LoginForm>
       <LoginFooter>
         <LinksWrapper>
           <Link
