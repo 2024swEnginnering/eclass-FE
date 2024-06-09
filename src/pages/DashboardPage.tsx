@@ -23,6 +23,7 @@ export default function DashboardPage() {
           name='소프트웨어공학 03분반'
           semester='2024년 1학기'
           color='#2F826A'
+          to='/lecture/1'
         />
       </LecturesWrapper>
     </Wrapper>

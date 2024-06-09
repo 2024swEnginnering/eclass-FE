@@ -17,40 +17,46 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const items = [
-  { text: "계정", onClick: () => {}, icon: AccountSVG },
-  { text: "대시보드", onClick: () => {}, icon: DashboardSVG },
-  { text: "과목", onClick: () => {}, icon: SubjectsSVG },
-  { text: "그룹", onClick: () => {}, icon: GroupSVG },
-  { text: "캘린더", onClick: () => {}, icon: CalendarSVG },
-  { text: "메시지함", onClick: () => {}, icon: MessageSVG },
-  { text: "마이페이지", onClick: () => {}, icon: MypageSVG },
-  { text: "이용안내", onClick: () => {}, icon: HelpSVG },
+  { text: "계정", Icon: AccountSVG },
+  {
+    text: "대시보드",
+    to: "/",
+    Icon: DashboardSVG,
+  },
+  { text: "과목", Icon: SubjectsSVG },
+  { text: "그룹", Icon: GroupSVG, disabled: true },
+  { text: "캘린더", Icon: CalendarSVG, disabled: true },
+  { text: "메시지함", Icon: MessageSVG, disabled: true },
+  { text: "마이페이지", Icon: MypageSVG, disabled: true },
+  { text: "이용안내", Icon: HelpSVG, disabled: true },
 ];
 
 // TODO: Sidebar 컴포넌트 구현
 //       - 스타일링, 현재 메뉴 하이라이트, 버트 클릭시 알맞는 페이지로 이동
 export default function Sidebar() {
   const { current, setCurrent } = useCurrentStore();
+  const navigate = useNavigate();
 
   return (
     <Drawer variant='permanent' sx={{ isplay: "flex" }}>
       <List sx={{ backgroundColor: "#3064c5", height: "100vh" }}>
-        {items.map((item) => {
-          const selected = current;
+        {items.map(({ text, to, Icon, disabled }) => {
           return (
             <ListItem
-              key={item.text}
+              key={text}
               disablePadding
               sx={{
-                backgroundColor: selected !== item.text ? "#3064c5" : "#FFFFFF",
+                backgroundColor: current !== text ? "#3064c5" : "#FFFFFF",
               }}
             >
               <ListItemButton
                 onClick={() => {
-                  if (item.text !== "이용안내") setCurrent(item.text);
-                  item.onClick();
+                  if (disabled) return;
+                  if (text !== "이용안내") setCurrent(text);
+                  to && navigate(to);
                 }}
                 sx={{
                   display: "flex",
@@ -68,18 +74,18 @@ export default function Sidebar() {
                     justifyContent: "center",
                   }}
                 >
-                  <item.icon
+                  <Icon
                     width={"26px"}
                     // height={"26px"}
-                    fill={selected === item.text ? "#3064c5" : "#FFFFFF"}
-                    color={selected === item.text ? "#3064c5" : "#FFFFFF"}
+                    fill={current === text ? "#3064c5" : "#FFFFFF"}
+                    color={current === text ? "#3064c5" : "#FFFFFF"}
                   />
                 </ListItemIcon>
                 <ListItemText
-                  primary={item.text}
+                  primary={text}
                   sx={{
                     fontSize: "12px",
-                    color: selected === item.text ? "#3064c5" : "#FFFFFF",
+                    color: current === text ? "#3064c5" : "#FFFFFF",
                     textAlign: "center",
                   }}
                 />

@@ -1,10 +1,13 @@
 import { AssignmentSVG } from "@/assets/icons";
+import useCurrentStore from "@/store/useCurrentStore";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 interface LectureCardProps {
   name: string;
   semester: string;
   color: string;
+  to: string;
 }
 
 const CardWrapper = styled.div`
@@ -39,10 +42,19 @@ export default function LectureCard({
   name,
   semester,
   color,
+  to,
 }: LectureCardProps) {
+  const navigate = useNavigate();
+  const { setCurrent } = useCurrentStore();
+
+  const handleClick = () => {
+    setCurrent("과목");
+    navigate(to);
+  };
+
   return (
     <CardWrapper style={{ backgroundColor: color }}>
-      <Content>
+      <Content onClick={handleClick}>
         <span style={{ color: color, fontSize: "14px", fontWeight: "bold" }}>
           {name}
         </span>
