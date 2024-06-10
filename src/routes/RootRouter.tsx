@@ -1,3 +1,4 @@
+import LectureLayout from "@/layout/LectureLayout";
 import SidebarLayout from "@/layout/SidebarLayout";
 import DashboardPage from "@/pages/DashboardPage";
 import LoginPage from "@/pages/Login";
@@ -11,7 +12,11 @@ const RootRouter = createBrowserRouter([
     element: <SidebarLayout />,
     children: [
       { path: "/", element: <DashboardPage /> },
-      { path: "/lecture/:id", element: <TempLecturePage /> },
+      {
+        path: "/lecture",
+        element: <LectureLayout />,
+        children: [{ path: ":id", element: <TempLecturePage /> }],
+      },
     ],
   },
   { path: "/login", element: <LoginPage /> },
