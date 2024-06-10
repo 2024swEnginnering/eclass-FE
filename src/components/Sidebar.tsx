@@ -20,7 +20,7 @@ import {
 import { useNavigate } from "react-router-dom";
 
 const items = [
-  { text: "계정", Icon: AccountSVG },
+  { text: "계정", Icon: AccountSVG, disabled: true },
   {
     text: "대시보드",
     to: "/",

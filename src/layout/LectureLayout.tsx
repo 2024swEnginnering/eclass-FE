@@ -1,4 +1,9 @@
+import AddTeammatePage from "@/pages/lecture/group/AddTeammatePage";
+import MeetingPage from "@/pages/lecture/group/MeetingPage";
+import MeetingTimePage from "@/pages/lecture/group/MeetingTimePage";
+import TimetablePage from "@/pages/lecture/group/TimetablePage";
 import { KeyboardArrowRightOutlined, MenuOutlined } from "@mui/icons-material";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -20,7 +25,7 @@ const Header = styled.header`
 
 const ContentGrid = styled.div`
   display: grid;
-  grid-template-columns: calc(156px * 2px) 1fr;
+  grid-template-columns: 312px 1fr;
   margin-top: 24px;
 `;
 
@@ -57,10 +62,10 @@ const leftListItems = [
 ];
 
 const rightListItems = [
-  { text: "팀원 추가하기" },
-  { text: "시간표 보기" },
-  { text: "미팅시간 정하기" },
-  { text: "온라인 미팅" },
+  { text: "팀원 추가하기", page: <AddTeammatePage /> },
+  { text: "시간표 보기", page: <TimetablePage /> },
+  { text: "미팅시간 정하기", page: <MeetingTimePage /> },
+  { text: "온라인 미팅", page: <MeetingPage /> },
 ];
 
 interface ListItemProps {
@@ -91,6 +96,13 @@ const ListItemText = ({ selected, text }: ListItemProps) => {
 };
 
 export default function LectureLayout() {
+  const [selected, setSelected] = useState(0);
+  const [page, setPage] = useState(rightListItems[selected].page);
+
+  useEffect(() => {
+    setPage(rightListItems[selected].page);
+  }, [selected]);
+
   return (
     <Wrapper>
       <Header>
@@ -119,13 +131,14 @@ export default function LectureLayout() {
             </List>
             <List>
               {rightListItems.map((item, i) => (
-                <ListItem key={i}>
-                  <ListItemText selected={i === 0} text={item.text} />
+                <ListItem key={i} onClick={() => setSelected(i)}>
+                  <ListItemText selected={selected === i} text={item.text} />
                 </ListItem>
               ))}
             </List>
           </div>
         </div>
+        {page && page}
       </ContentGrid>
     </Wrapper>
   );
