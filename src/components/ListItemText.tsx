@@ -5,12 +5,17 @@ interface ListItemProps extends React.HTMLAttributes<HTMLDivElement> {
   text: string;
   onClick?: () => void;
   selectedColor?: string;
+  disabled?: boolean;
 }
 
-const ItemTextWrapper = styled.div`
+interface ItemTextWrapperProps {
+  disabled?: boolean;
+}
+
+const ItemTextWrapper = styled.div<ItemTextWrapperProps>`
   &:hover {
-    cursor: pointer;
-    opacity: 0.7;
+    cursor: ${(props) => (props.disabled ? "" : "pointer")};
+    opacity: ${(props) => (props.disabled ? 1 : 0.7)};
   }
 `;
 
@@ -19,11 +24,13 @@ export const ListItemText = ({
   text,
   style,
   onClick,
+  disabled,
   selectedColor,
 }: ListItemProps) => {
   return (
     <ItemTextWrapper
       onClick={onClick}
+      disabled={disabled}
       style={{
         color: selected ? `${selectedColor ? selectedColor : "#2D3B45"}` : "",
         borderLeft: selected

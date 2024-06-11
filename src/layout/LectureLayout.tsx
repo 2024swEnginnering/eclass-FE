@@ -3,8 +3,8 @@ import AddTeammatePage from "@/pages/lecture/group/AddTeammatePage";
 import MeetingPage from "@/pages/lecture/group/MeetingPage";
 import MeetingTimePage from "@/pages/lecture/group/MeetingTimePage";
 import TimetablePage from "@/pages/lecture/group/TimetablePage";
+import useGroupCurrentStore from "@/store/useGroupCurrentStore";
 import { KeyboardArrowRightOutlined, MenuOutlined } from "@mui/icons-material";
-import { useEffect, useState } from "react";
 import styled from "styled-components";
 import GroupWrapper from "./GroupWrapper";
 
@@ -71,12 +71,7 @@ const rightListItems = [
 ];
 
 export default function LectureLayout() {
-  const [selected, setSelected] = useState(0);
-  const [page, setPage] = useState(rightListItems[selected].page);
-
-  useEffect(() => {
-    setPage(rightListItems[selected].page);
-  }, [selected]);
+  const { current, setCurrent } = useGroupCurrentStore();
 
   return (
     <Wrapper>
@@ -106,14 +101,14 @@ export default function LectureLayout() {
             </List>
             <List>
               {rightListItems.map((item, i) => (
-                <ListItem key={i} onClick={() => setSelected(i)}>
-                  <ListItemText selected={selected === i} text={item.text} />
+                <ListItem key={i} onClick={() => setCurrent(i)}>
+                  <ListItemText selected={current === i} text={item.text} />
                 </ListItem>
               ))}
             </List>
           </div>
         </div>
-        <GroupWrapper>{page && page}</GroupWrapper>
+        <GroupWrapper>{rightListItems[current].page}</GroupWrapper>
       </ContentGrid>
     </Wrapper>
   );

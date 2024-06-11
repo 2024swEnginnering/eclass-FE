@@ -162,7 +162,7 @@ export default function LoginPage() {
           </Link>
         </LinksWrapper>
         <p style={{ fontSize: "12px", fontWeight: "bold" }}>
-          COPYRIGHT(C) 2024 4조@CHUNG-ANG UNIVERSITY ALL RIGHTS RESERVED.
+          COPYRIGHT(C) 2024 9조@CHUNG-ANG UNIVERSITY ALL RIGHTS RESERVED.
         </p>
       </LoginFooter>
     </Wrapper>
