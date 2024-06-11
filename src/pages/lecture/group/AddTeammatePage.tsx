@@ -52,7 +52,7 @@ export default function AddTeammatePage() {
         <ModalWrapper>
           <h3 style={{ margin: 0 }}>그룹 팀원 초대</h3>
           <Typography variant='subtitle1' style={{ opacity: 0.7 }}>
-            선택한 학생들을 같은 그룹으로 초대하겠습니까?
+            선택한 학생들로 팀을 생성하시겠습니까?
           </Typography>
           <Button
             sx={{ width: "100%", marginTop: "10px" }}
@@ -92,7 +92,7 @@ export default function AddTeammatePage() {
         ))}
       </TeamList>
       <Button variant='contained' color='primary' onClick={openModal}>
-        팀원 추가하기
+        팀 생성하기
       </Button>
     </>
   );
