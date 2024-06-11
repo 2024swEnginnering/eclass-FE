@@ -27,5 +27,5 @@ export default function DashboardPage() {
         />
       </LecturesWrapper>
     </Wrapper>
-  ); // TODO : MainPage 구현
+  );
 }
