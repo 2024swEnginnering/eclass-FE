@@ -1,3 +1,13 @@
 export default function MeetingPage() {
-  return <div>미팅 페이지</div>;
+  return (
+    <img
+      src='/zoom.png'
+      width={"118%"}
+      style={{
+        position: "relative",
+        left: "-76px",
+        top: "-30px",
+      }}
+    />
+  );
 }
