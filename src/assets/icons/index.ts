@@ -1,0 +1,10 @@
+export { ReactComponent as AccountSVG } from "./account.svg";
+export { ReactComponent as AssignmentSVG } from "./assignment.svg";
+export { ReactComponent as CalendarSVG } from "./calendar.svg";
+export { ReactComponent as DashboardSVG } from "./dashboard.svg";
+export { ReactComponent as GroupSVG } from "./group.svg";
+export { ReactComponent as HelpSVG } from "./help.svg";
+export { ReactComponent as MessageSVG } from "./message.svg";
+export { ReactComponent as MypageSVG } from "./mypage.svg";
+export { ReactComponent as PostsSVG } from "./posts.svg";
+export { ReactComponent as SubjectsSVG } from "./subjects.svg";
