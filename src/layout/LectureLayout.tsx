@@ -1,3 +1,4 @@
+import { ListItemText } from "@/components/ListItemText";
 import AddTeammatePage from "@/pages/lecture/group/AddTeammatePage";
 import MeetingPage from "@/pages/lecture/group/MeetingPage";
 import MeetingTimePage from "@/pages/lecture/group/MeetingTimePage";
@@ -5,6 +6,7 @@ import TimetablePage from "@/pages/lecture/group/TimetablePage";
 import { KeyboardArrowRightOutlined, MenuOutlined } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import GroupWrapper from "./GroupWrapper";
 
 const Wrapper = styled.div`
   display: grid;
@@ -24,15 +26,15 @@ const Header = styled.header`
 `;
 
 const ContentGrid = styled.div`
-  display: grid;
-  grid-template-columns: 312px 1fr;
+  display: flex;
+  grid-template-columns: flex start;
   margin-top: 24px;
 `;
 
 const List = styled.ul`
   list-style: none;
   padding: 0px;
-  width: 156px;
+  width: 130px;
 `;
 
 const ListItem = styled.li`
@@ -68,33 +70,6 @@ const rightListItems = [
   { text: "온라인 미팅", page: <MeetingPage /> },
 ];
 
-interface ListItemProps {
-  selected: boolean;
-  text: string;
-}
-
-const ListItemText = ({ selected, text }: ListItemProps) => {
-  return (
-    <div
-      style={{
-        color: selected ? "#2D3B45" : "",
-        borderLeft: selected ? "3px solid #2D3B45" : "",
-      }}
-    >
-      <span
-        style={{
-          padding: "0px 6px",
-          textDecoration: "underline",
-          position: "relative",
-          left: selected ? "-3px" : "0px",
-        }}
-      >
-        {text}
-      </span>
-    </div>
-  );
-};
-
 export default function LectureLayout() {
   const [selected, setSelected] = useState(0);
   const [page, setPage] = useState(rightListItems[selected].page);
@@ -108,14 +83,14 @@ export default function LectureLayout() {
       <Header>
         <MenuOutlined style={{ fontSize: "24px", marginRight: "8px" }} />
         {path.map((p, i) => (
-          <>
+          <div key={i}>
             {i !== 0 && (
               <KeyboardArrowRightOutlined
                 style={{ fontSize: "15px", color: "#777777" }}
               />
             )}
-            <span key={i}>{p}</span>
-          </>
+            <span>{p}</span>
+          </div>
         ))}
       </Header>
       <ContentGrid>
@@ -138,7 +113,7 @@ export default function LectureLayout() {
             </List>
           </div>
         </div>
-        {page && page}
+        <GroupWrapper>{page && page}</GroupWrapper>
       </ContentGrid>
     </Wrapper>
   );
